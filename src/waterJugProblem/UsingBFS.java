@@ -38,10 +38,12 @@ public class UsingBFS {
 		alreadyEncountered = new HashSet<>();	//To store which states have already been visited
 		alreadyEncountered.add(root);
 		int noOfChildrenAtThisLevel = 0;
+		int numberOfNodesTraversed = 0;
 		int level = 0;
 		boolean flag = false;
 		Queue<Integer> noOfChildrenOfNodes = new LinkedList<>();
 		while(!queue.isEmpty()){
+			numberOfNodesTraversed++;
 			if(noOfChildrenAtThisLevel==0 && !noOfChildrenOfNodes.isEmpty()){
 				noOfChildrenAtThisLevel = noOfChildrenOfNodes.poll();
 				level++;
@@ -49,11 +51,13 @@ public class UsingBFS {
 			int tempVariableForChildren = 0;
 			Node node = queue.poll();
 			if(node.x == t || node.y == t){
-				out.println("The required capacity can be achived after "+level+" move(s)");
+				out.println("The required capacity can be achieved after "+level+" move(s)");
+				out.println("Number of nodes traversed: "+numberOfNodesTraversed);
 				break;
 			}
 			if(level > MAX_DEPTH_OF_TREE){
 				out.println("The desired capacity was not achieved within a tree depth of 5");
+				out.println("Number of nodes traversed: "+numberOfNodesTraversed);
 				break;
 			}
 			if(node.x == MAX_CAPACITY_OF_LEFT_JUG && node.y == 0){

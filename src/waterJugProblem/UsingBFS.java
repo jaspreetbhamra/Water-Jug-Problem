@@ -7,10 +7,8 @@ package waterJugProblem;
 
 import java.util.Scanner;
 import static java.lang.System.*;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 
@@ -119,13 +117,3 @@ public class UsingBFS {
 	}
 }
 
-class Node{
-    int x, y;
-    //int height;
-    List<Node> listOfChildren = new ArrayList<>();
-    public Node(int x, int y){
-        this.x = x;
-        this.y = y;
-        listOfChildren = null;
-    }
-}

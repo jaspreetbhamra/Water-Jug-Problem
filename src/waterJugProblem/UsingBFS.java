@@ -26,7 +26,7 @@ public class UsingBFS {
     
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        out.println("Enter the capacity of the two jugs respectively");
+        out.println("Enter the capacities of the two jugs respectively");
 		out.println("The capacity of the larger jug should be followed by the capacity of the smaller jug and they should not be equal");
         MAX_CAPACITY_OF_LEFT_JUG = sc.nextInt();
         MAX_CAPACITY_OF_RIGHT_JUG = sc.nextInt();
@@ -54,7 +54,7 @@ public class UsingBFS {
 				out.println("The required capacity can be achived after "+level+" move(s)");
 				break;
 			}
-			if(level > 5){
+			if(level > MAX_DEPTH_OF_TREE){
 				out.println("The desired capacity was not achieved within a tree depth of 5");
 				break;
 			}

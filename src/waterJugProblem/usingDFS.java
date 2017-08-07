@@ -42,6 +42,7 @@ public class usingDFS {
 			numberOfNodesTraversed++;
 			int tempVariableForChildren = 0;
 			Node node = stack.pop();
+//			System.out.println("("+node.x+","+node.y+")");
 			int currentLevel = keepsTrackOfCurrentLevel.pop();
 			if(node.x == t || node.y == t){
 				System.out.println("The required capacity can be achieved after "+currentLevel+" move(s)");
@@ -80,6 +81,9 @@ public class usingDFS {
 					keepsTrackOfCurrentLevel.push(currentLevel+1);
 				Node newNode3 = new Node(node.x-MAX_CAPACITY_OF_RIGHT_JUG+node.y, MAX_CAPACITY_OF_RIGHT_JUG);
 				if(checkIfEncountered(newNode3))
+					keepsTrackOfCurrentLevel.push(currentLevel+1);
+				Node newNode4 = new Node(MAX_CAPACITY_OF_LEFT_JUG, node.y-MAX_CAPACITY_OF_LEFT_JUG+node.x);
+				if(checkIfEncountered(newNode4))
 					keepsTrackOfCurrentLevel.push(currentLevel+1);
 			} else if(node.x != 0){						// => y=0
 				if(node.x>MAX_CAPACITY_OF_RIGHT_JUG){

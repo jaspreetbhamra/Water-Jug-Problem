@@ -32,31 +32,38 @@ public class UsingBFS {
         out.println("Enter the required capacity");
         int t = sc.nextInt();
 		Node root = new Node(0, 0);
+//		out.println("("+root.x+","+root.y+")");
 		//root.height = 0;
 		queue = new LinkedList<>();		//To store nodes in order to process them in the BFS manner
 		queue.add(root);
 		alreadyEncountered = new HashSet<>();	//To store which states have already been visited
 		alreadyEncountered.add(root);
-		int noOfChildrenAtThisLevel = 0;
+//		int noOfChildrenAtThisLevel = 0;
 		int numberOfNodesTraversed = 0;
-		int level = 0;
+		int level = 1;
 		boolean flag = false;
-		Queue<Integer> noOfChildrenOfNodes = new LinkedList<>();
+//		Queue<Integer> noOfChildrenOfNodes = new LinkedList<>();
 		while(!queue.isEmpty()){
 			numberOfNodesTraversed++;
-			if(noOfChildrenAtThisLevel==0 && !noOfChildrenOfNodes.isEmpty()){
-				noOfChildrenAtThisLevel = noOfChildrenOfNodes.poll();
-				level++;
-			}
+//			if(noOfChildrenAtThisLevel==0 && !noOfChildrenOfNodes.isEmpty()){
+//				noOfChildrenAtThisLevel = noOfChildrenOfNodes.poll();
+//				level++;
+//			}
 			int tempVariableForChildren = 0;
 			Node node = queue.poll();
+//			out.println("("+node.x+","+node.y+")");
+			if(node.x==-1 && node.y==-1){
+				++level;
+				queue.add(new Node(-1, -1));
+				continue;
+			}
 			if(node.x == t || node.y == t){
-				out.println("The required capacity can be achieved after "+level+" move(s)");
+				out.println("The required capacity can be achieved after "+(level+1)+" move(s)");
 				out.println("Number of nodes traversed: "+numberOfNodesTraversed);
 				break;
 			}
 			if(level > MAX_DEPTH_OF_TREE){
-				out.println("The desired capacity was not achieved within a tree depth of 5");
+				out.println("The desired capacity was not achieved within a tree depth of "+MAX_DEPTH_OF_TREE);
 				out.println("Number of nodes traversed: "+numberOfNodesTraversed);
 				break;
 			}
@@ -84,6 +91,9 @@ public class UsingBFS {
 					++tempVariableForChildren;
 				Node newNode3 = new Node(node.x-MAX_CAPACITY_OF_RIGHT_JUG+node.y, MAX_CAPACITY_OF_RIGHT_JUG);
 				if(checkIfEncountered(newNode3))
+					++tempVariableForChildren;
+				Node newNode4 = new Node(MAX_CAPACITY_OF_LEFT_JUG, node.y-MAX_CAPACITY_OF_LEFT_JUG+node.x);
+				if(checkIfEncountered(newNode4))
 					++tempVariableForChildren;
 			} else if(node.x != 0){						// => y=0
 				if(node.x>MAX_CAPACITY_OF_RIGHT_JUG){
@@ -119,9 +129,12 @@ public class UsingBFS {
 				if(checkIfEncountered(newNode2))
 					++tempVariableForChildren;
 			}
-			noOfChildrenOfNodes.add(tempVariableForChildren);
-			if(flag)
-				noOfChildrenAtThisLevel--;
+			
+			//queue.add(new Node(-1, -1));
+			
+//			noOfChildrenOfNodes.add(tempVariableForChildren);
+			if(!flag)
+				queue.add(new Node(-1, -1));
 			flag = true;
 		}
     }

@@ -28,7 +28,7 @@ public class UsingBFS {
 		out.println("The capacity of the larger jug should be followed by the capacity of the smaller jug and they should not be equal");
         MAX_CAPACITY_OF_LEFT_JUG = sc.nextInt();
         MAX_CAPACITY_OF_RIGHT_JUG = sc.nextInt();
-		MAX_DEPTH_OF_TREE = 5;
+		MAX_DEPTH_OF_TREE = 15;
         out.println("Enter the required capacity");
         int t = sc.nextInt();
 		Node root = new Node(0, 0);
@@ -82,6 +82,9 @@ public class UsingBFS {
 				Node newNode2 = new Node(node.x, 0);
 				if(checkIfEncountered(newNode2))
 					++tempVariableForChildren;
+				Node newNode3 = new Node(node.x-MAX_CAPACITY_OF_RIGHT_JUG+node.y, MAX_CAPACITY_OF_RIGHT_JUG);
+				if(checkIfEncountered(newNode3))
+					++tempVariableForChildren;
 			} else if(node.x != 0){						// => y=0
 				if(node.x>MAX_CAPACITY_OF_RIGHT_JUG){
 					Node newNode = new Node(node.x-MAX_CAPACITY_OF_RIGHT_JUG, MAX_CAPACITY_OF_RIGHT_JUG);
@@ -91,10 +94,22 @@ public class UsingBFS {
 					Node newNode = new Node(0, node.x);
 					if(checkIfEncountered(newNode))
 						++tempVariableForChildren;
+					Node newNode2 = new Node(MAX_CAPACITY_OF_LEFT_JUG, node.x);
+					if(checkIfEncountered(newNode2))
+						++tempVariableForChildren;
+					Node newNode3 = new Node(node.x, MAX_CAPACITY_OF_RIGHT_JUG);
+					if(checkIfEncountered(newNode3))
+						++tempVariableForChildren;
 				}
 			} else if(node.y != 0){						// => x=0
 				Node newNode = new Node(node.y, 0);
 				if(checkIfEncountered(newNode))
+					++tempVariableForChildren;
+				Node newNode2 = new Node(node.y, MAX_CAPACITY_OF_RIGHT_JUG);
+				if(checkIfEncountered(newNode2))
+					++tempVariableForChildren;
+				Node newNode3 =  new Node(MAX_CAPACITY_OF_LEFT_JUG, node.y);
+				if(checkIfEncountered(newNode3))
 					++tempVariableForChildren;
 			} else {									// When x and y are both 0 
 				Node newNode1 = new Node(MAX_CAPACITY_OF_LEFT_JUG, 0);

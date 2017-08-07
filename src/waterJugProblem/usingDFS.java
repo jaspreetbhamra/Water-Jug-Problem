@@ -26,7 +26,7 @@ public class usingDFS {
 		System.out.println("The capacity of the larger jug should be followed by the capacity of the smaller jug and they should not be equal");
         MAX_CAPACITY_OF_LEFT_JUG = sc.nextInt();
         MAX_CAPACITY_OF_RIGHT_JUG = sc.nextInt();
-		MAX_DEPTH_OF_TREE = 5;
+		MAX_DEPTH_OF_TREE = 10;
         System.out.println("Enter the required capacity");
         int t = sc.nextInt();
 		int level = 0;
@@ -73,30 +73,40 @@ public class usingDFS {
 				}
 			} else if(node.x != 0 && node.y != 0){
 				Node newNode1 = new Node(0, node.y);
-				if(checkIfEncountered(newNode1)){
+				if(checkIfEncountered(newNode1))
 					keepsTrackOfCurrentLevel.push(currentLevel+1);
-				}
 				Node newNode2 = new Node(node.x, 0);
-				if(checkIfEncountered(newNode2)){
+				if(checkIfEncountered(newNode2))
 					keepsTrackOfCurrentLevel.push(currentLevel+1);
-				}
+				Node newNode3 = new Node(node.x-MAX_CAPACITY_OF_RIGHT_JUG+node.y, MAX_CAPACITY_OF_RIGHT_JUG);
+				if(checkIfEncountered(newNode3))
+					keepsTrackOfCurrentLevel.push(currentLevel+1);
 			} else if(node.x != 0){						// => y=0
 				if(node.x>MAX_CAPACITY_OF_RIGHT_JUG){
 					Node newNode = new Node(node.x-MAX_CAPACITY_OF_RIGHT_JUG, MAX_CAPACITY_OF_RIGHT_JUG);
-					if(checkIfEncountered(newNode)){
+					if(checkIfEncountered(newNode))
 						keepsTrackOfCurrentLevel.push(currentLevel+1);
-					}
 				} else{
 					Node newNode = new Node(0, node.x);
-					if(checkIfEncountered(newNode)){
+					if(checkIfEncountered(newNode))
 						keepsTrackOfCurrentLevel.push(currentLevel+1);
-					}
+					Node newNode2 = new Node(MAX_CAPACITY_OF_LEFT_JUG, node.x);
+					if(checkIfEncountered(newNode2))
+						keepsTrackOfCurrentLevel.push(currentLevel+1);
+					Node newNode3 = new Node(node.x, MAX_CAPACITY_OF_RIGHT_JUG);
+					if(checkIfEncountered(newNode3))
+						keepsTrackOfCurrentLevel.push(currentLevel+1);
 				}
 			} else if(node.y != 0){						// => x=0
 				Node newNode = new Node(node.y, 0);
-				if(checkIfEncountered(newNode)){
+				if(checkIfEncountered(newNode))
 					keepsTrackOfCurrentLevel.push(currentLevel+1);
-				}
+				Node newNode2 = new Node(node.y, MAX_CAPACITY_OF_RIGHT_JUG);
+				if(checkIfEncountered(newNode2))
+						keepsTrackOfCurrentLevel.push(currentLevel+1);
+				Node newNode3 =  new Node(MAX_CAPACITY_OF_LEFT_JUG, node.y);
+				if(checkIfEncountered(newNode3))
+					keepsTrackOfCurrentLevel.push(currentLevel+1);
 			} else {									// When x and y are both 0 
 				Node newNode1 = new Node(MAX_CAPACITY_OF_LEFT_JUG, 0);
 				if(checkIfEncountered(newNode1)){
